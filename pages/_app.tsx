@@ -1,9 +1,11 @@
 import { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
 
+import Footer from '../components/Footer'
+
 const AppWrap = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen mx-auto text-base text-gray-900 bg-cool-gray-200 xs:py-8">
+    <div className="flex flex-col h-screen">
       <header className="flex item-center px-4 py-3 border-b">
         <img
           className="rounded-full w-7 h-7"
@@ -19,12 +21,7 @@ const AppWrap = ({ Component, pageProps }: AppProps) => {
         <Component {...pageProps} />
       </main>
 
-      <footer className="flex border-t">
-        <a className="w-1/4 text-center py-2" href="">Home</a>
-        <a className="w-1/4 text-center py-2" href="">Search</a>
-        <a className="w-1/4 text-center py-2" href="">Notifications</a>
-        <a className="w-1/4 text-center py-2" href="">Messages</a>
-      </footer>
+      <Footer />
     </div>
   )
 }
