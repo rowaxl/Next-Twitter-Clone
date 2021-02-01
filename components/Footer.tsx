@@ -3,7 +3,7 @@ import SearchIcon from './SearchIcon'
 import BellIcon from './BellIcon'
 import MailboxIcon from './MailboxIcon'
 
-import Link from './Link'
+import Link, { LinkChildrenProp } from './Link'
 
 const Footer = () => {
   return (
@@ -12,25 +12,37 @@ const Footer = () => {
         href="/"
         className="flex items-center justify-center w-1/4 text-center py-4"
       >
-        <HomeIcon className="w-7 h-7" isActive={true} />
+        {
+          ({ isActive }: LinkChildrenProp) =>
+            <HomeIcon className="w-7 h-7" isActive={isActive} />
+        }
       </Link>
       <Link
         href="/explore"
         className="flex items-center justify-center w-1/4 text-center py-4"
       >
-        <SearchIcon className="w-7 h-7" isActive={false} />
+        {
+          ({ isActive }: LinkChildrenProp) => 
+            <SearchIcon className="w-7 h-7" isActive={isActive} />
+        }
       </Link>
       <Link
-        href="/notification"
+        href="/notifications"
         className="flex items-center justify-center w-1/4 text-center py-4"
       >
-        <BellIcon className="w-7 h-7" isActive={false} />
+        {
+          ({ isActive }: LinkChildrenProp) => 
+            <BellIcon className="w-7 h-7" isActive={isActive} />
+        }
       </Link>
       <Link
         href="/messages"
         className="flex items-center justify-center w-1/4 text-center py-4"
       >
-        <MailboxIcon className="w-7 h-7" isActive={false} />
+        {
+          ({ isActive }: LinkChildrenProp) => 
+            <MailboxIcon className="w-7 h-7" isActive={isActive} />
+        }
       </Link>
     </footer>
   )

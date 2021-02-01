@@ -1,12 +1,15 @@
 import NextLink, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 
 interface ILinkProps extends LinkProps {
   className: string
   activeClassName?: string
   inactiveClassName?: string
-  children: ReactNode
+  children: Function
+}
+
+export interface LinkChildrenProp {
+  isActive: boolean
 }
 
 const Link = ({
@@ -25,7 +28,7 @@ const Link = ({
   return (
     <NextLink href={href} {...resProps}>
       <a className={currentClassName} href="">
-        {children}
+        {children({ isActive })}
       </a>
     </NextLink>
   )
