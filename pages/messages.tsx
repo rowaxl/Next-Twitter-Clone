@@ -6,4 +6,6 @@ const MessagesPage = () => {
   )
 }
 
+MessagesPage.displayName = 'Messages'
+
 export default MessagesPage

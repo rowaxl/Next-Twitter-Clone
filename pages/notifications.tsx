@@ -6,4 +6,6 @@ const NotificationPage = () => {
   )
 }
 
+NotificationPage.displayName = 'Notifications'
+
 export default NotificationPage

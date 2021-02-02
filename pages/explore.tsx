@@ -6,4 +6,6 @@ const ExplorePage = () => {
   )
 }
 
+ExplorePage.displayName = 'Search'
+
 export default ExplorePage

@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules", "tailwind.config.js", "postcss.config.js"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "server.js"]
 }

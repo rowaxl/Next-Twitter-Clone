@@ -1,9 +1,12 @@
 import { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
+import '../server'
 
 import Footer from '../components/Footer'
 
 const AppWrap = ({ Component, pageProps }: AppProps) => {
+  const title = Component.displayName
+
   return (
     <div className="flex flex-col h-screen">
       <header className="flex item-center px-4 py-3 border-b">
@@ -13,11 +16,11 @@ const AppWrap = ({ Component, pageProps }: AppProps) => {
           alt="profile-img"
         />
         <p className="ml-6 text-lg font-extrabold">
-          Page Title
+          {title ? title : 'Home'}
         </p>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-scroll">
         <Component {...pageProps} />
       </main>
 
