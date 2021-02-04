@@ -52,10 +52,10 @@ let server = createServer({
   },
 
   seeds(server) {
-    // server.create('tweet', 'fromKim', { text: 'just setting up my twt' })
-    // server.create('tweet', 'fromKim', { text: 'Hello world' })
-    // server.create('tweet', 'fromKim', { text: 'wtf' })
-
     server.createList('tweet', 10)
   }
 })
+
+setInterval(() => {
+  server.create("tweet");
+}, 5000);
