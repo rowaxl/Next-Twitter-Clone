@@ -1,4 +1,5 @@
 import { ITweet } from '../interfaces'
+import { Tw } from '../tw'
 import { parseISO, format } from 'date-fns'
 
 const Tweet = ({
@@ -9,8 +10,8 @@ const Tweet = ({
   date
 }: ITweet) => {
   return (
-    <div className="px-4 py-3 border-b border-gray-200">
-      <div className="flex">
+    <div className={Tw().twPx4().twPy4().borderColor('gray-200').$()}>
+      <div className={Tw().twFlex().$()}>
         <img
           src={avatarUrl}
           alt={avatarUrl}
