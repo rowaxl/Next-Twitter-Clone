@@ -2,18 +2,16 @@ import { ITweet } from '../interfaces'
 import { parseISO, format } from 'date-fns'
 
 const Tweet = ({
-  avatarUrl,
   text,
-  name,
-  userName,
-  date
+  date,
+  user
 }: ITweet) => {
   return (
     <div className="px-4 py-3 border-b border-gray-200">
       <div className="flex">
         <img
-          src={avatarUrl}
-          alt={avatarUrl}
+          src={user.avatarUrl}
+          alt={user.id}
           className="w-10 h-10 mr-3 rounded-full" 
         />
 
@@ -22,10 +20,10 @@ const Tweet = ({
           <p className="flex text-sm">
             <span className="truncate">
               <span className="font-bold">
-                {name}{" "}
+                {user.name}{" "}
               </span>
               <span className="pl-1 text-cool-gray-500">
-                @{userName}
+                @{user.id}
               </span>
             </span>
             <span className="flex-shrink-0">
