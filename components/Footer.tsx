@@ -7,7 +7,7 @@ import Link, { LinkChildrenProp } from './Link'
 
 const Footer = () => {
   return (
-    <footer className="flex border-t border-gray-200">
+    <footer className="flex border-t border-gray-200 dark:bg-black">
       <Link
         href="/"
         className="flex items-center justify-center w-1/4 text-center py-4"

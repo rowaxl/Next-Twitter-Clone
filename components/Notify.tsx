@@ -11,19 +11,23 @@ const Notify = ({ originalTweet, notification }: INotifyProps) => {
     <div>
       <div>
         <img
-          src={originalTweet.user.avatarUrl}
-          alt={originalTweet.user.id}
+          src={notification.from.avatarURL}
+          alt={notification.from.id}
           className="w-10 h-10 mr-3 rounded-full" 
         />
 
         <p className="flex text-sm">
           <span className="truncate">
             <span className="font-bold">
-              {notification.user.name}{" "}
+              {notification.from.name}{" "}{`${notification.category}ed your tweet`}
             </span>
           </span>
         </p>
-            
+        
+
+        <span>
+          {originalTweet.text}
+        </span>
       </div>
     </div>
   )

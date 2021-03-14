@@ -1,6 +1,6 @@
 export interface IUser {
   id: string
-  avatarUrl: string
+  avatarURL: string
   name: string,
 }
 
@@ -9,6 +9,8 @@ export interface ITweet {
   text: string
   user: IUser
   date: string
+  liked: number
+  retweeted: number
 }
 
 export type NotifyCategory = 'like' | 'retweet'

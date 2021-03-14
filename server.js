@@ -1,6 +1,6 @@
 import { createServer, Model, Factory, trait } from "miragejs"
 import { add } from 'date-fns'
-import faker, { name, internet, lorem } from 'faker'
+import faker, { name, internet, lorem, random } from 'faker'
 import { AvatarGenerator } from 'random-avatar-generator'
 
 faker.seed(123)
@@ -16,6 +16,9 @@ let server = createServer({
 
   factories: {
     tweet: Factory.extend({
+      id() {
+        return random.uuid()
+      },
       user() {
         return {
           id: internet.userName(),
@@ -29,14 +32,14 @@ let server = createServer({
       date(i) {
         return add(startingDate, { days: i }).toISOString()
       },
-
-      fromKim: trait({
-        name: 'Wonjae Kim',
-        userName: 'rowaxl0',
-        avatarUrl: 'https://pbs.twimg.com/profile_images/1355966530652045313/LaqS48cW_400x400.jpg'
-      })
+      liked() {
+        return Math.floor(Math.random() * 100)
+      },
+      retweeted() {
+        return Math.floor(Math.random() * 100)
+      }
     }),
-    notifications: Factory.extends({
+    notifications: Factory.extend({
       user() {
         return {
           id: internet.userName(),
