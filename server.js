@@ -1,5 +1,5 @@
 import { createServer, Model, Factory, trait } from "miragejs"
-import { add, parseISO } from 'date-fns'
+import { add } from 'date-fns'
 import faker, { name, internet, lorem } from 'faker'
 import { AvatarGenerator } from 'random-avatar-generator'
 
@@ -7,7 +7,7 @@ faker.seed(123)
 
 const generator = new AvatarGenerator()
 
-let startingDate = parseISO('2021-01-01')
+let startingDate = new Date()
 let server = createServer({
   timing: 1000,
   models: {
@@ -16,17 +16,15 @@ let server = createServer({
 
   factories: {
     tweet: Factory.extend({
-      name() {
-        return name.findName()
-      },
-      userName() {
-        return internet.userName()
+      user() {
+        return {
+          id: internet.userName(),
+          name: name.findName(),
+          avatarURL: generator.generateRandomAvatar()
+        }
       },
       text() {
         return lorem.sentence()
-      },
-      avatarUrl() {
-        return generator.generateRandomAvatar()
       },
       date(i) {
         return add(startingDate, { days: i }).toISOString()
@@ -37,6 +35,23 @@ let server = createServer({
         userName: 'rowaxl0',
         avatarUrl: 'https://pbs.twimg.com/profile_images/1355966530652045313/LaqS48cW_400x400.jpg'
       })
+    }),
+    notifications: Factory.extends({
+      user() {
+        return {
+          id: internet.userName(),
+          name: name.findName(),
+          avatarURL: generator.generateRandomAvatar()
+        }
+      },
+      category() {
+        const categories = ['like', 'retweet']
+        const i = Math.floor(Math.random() * categories.length)
+        return categories[i]
+      },
+      date(i) {
+        return add(startingDate, { days: i }).toISOString()
+      },
     })
   },
 
