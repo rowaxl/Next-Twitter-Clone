@@ -9,6 +9,7 @@ export interface ITweet {
   text: string
   user: IUser
   date: string
+  replied: number
   liked: number
   retweeted: number
 }
@@ -16,7 +17,7 @@ export interface ITweet {
 export type NotifyCategory = 'like' | 'retweet'
 
 export interface INotify {
-  tweetID: string
-  from: IUser
-  category: NotifyCategory[]
+  tweet: string
+  user: IUser
+  category: NotifyCategory
 }

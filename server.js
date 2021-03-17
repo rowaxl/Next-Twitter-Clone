@@ -12,6 +12,7 @@ let server = createServer({
   timing: 1000,
   models: {
     tweet: Model,
+    notification: Model,
   },
 
   factories: {
@@ -32,6 +33,9 @@ let server = createServer({
       date(i) {
         return add(startingDate, { days: i }).toISOString()
       },
+      replied() {
+        return Math.floor(Math.random() * 10)
+      },
       liked() {
         return Math.floor(Math.random() * 100)
       },
@@ -39,7 +43,7 @@ let server = createServer({
         return Math.floor(Math.random() * 100)
       }
     }),
-    notifications: Factory.extend({
+    notification: Factory.extend({
       user() {
         return {
           id: internet.userName(),
@@ -52,8 +56,8 @@ let server = createServer({
         const i = Math.floor(Math.random() * categories.length)
         return categories[i]
       },
-      date(i) {
-        return add(startingDate, { days: i }).toISOString()
+      tweet() {
+        return lorem.sentence()
       },
     })
   },
@@ -64,13 +68,15 @@ let server = createServer({
         return true;
     });
     this.namespace = 'api'
-    this.get('tweets')
+    this.get('tweets', 'tweet')
+    this.get('notifications', 'notification')
 
     this.passthrough()
   },
 
   seeds(server) {
     server.createList('tweet', 10)
+    server.createList('notification', 20)
   }
 })
 

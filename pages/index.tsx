@@ -15,8 +15,6 @@ const IndexPage = () => {
 
   if (error) return "Unexpected Error Occurred"
 
-  console.log({ error, data, buffer })
-
   if (!buffer) return (
     <p className="px-4 py-2 mt-32 text-lg font-medium text-center text-gray-400">
       Loading...
@@ -33,6 +31,7 @@ const IndexPage = () => {
             user={tweet.user}
             text={tweet.text}
             date={tweet.date}
+            replied={tweet.replied}
             liked={tweet.liked}
             retweeted={tweet.retweeted}
           />
@@ -42,6 +41,6 @@ const IndexPage = () => {
   )
 }
 
-IndexPage.displayName = 'Latest Tweets'
+IndexPage.displayName = 'Home'
 
 export default IndexPage
