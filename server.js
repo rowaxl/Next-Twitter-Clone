@@ -1,6 +1,6 @@
 import { createServer, Model, Factory, trait } from "miragejs"
 import { add } from 'date-fns'
-import faker, { name, internet, lorem } from 'faker'
+import faker, { name, internet, lorem, random } from 'faker'
 import { AvatarGenerator } from 'random-avatar-generator'
 
 faker.seed(123)
@@ -12,10 +12,14 @@ let server = createServer({
   timing: 1000,
   models: {
     tweet: Model,
+    notification: Model,
   },
 
   factories: {
     tweet: Factory.extend({
+      id() {
+        return random.uuid()
+      },
       user() {
         return {
           id: internet.userName(),
@@ -29,14 +33,17 @@ let server = createServer({
       date(i) {
         return add(startingDate, { days: i }).toISOString()
       },
-
-      fromKim: trait({
-        name: 'Wonjae Kim',
-        userName: 'rowaxl0',
-        avatarUrl: 'https://pbs.twimg.com/profile_images/1355966530652045313/LaqS48cW_400x400.jpg'
-      })
+      replied() {
+        return Math.floor(Math.random() * 10)
+      },
+      liked() {
+        return Math.floor(Math.random() * 100)
+      },
+      retweeted() {
+        return Math.floor(Math.random() * 100)
+      }
     }),
-    notifications: Factory.extends({
+    notification: Factory.extend({
       user() {
         return {
           id: internet.userName(),
@@ -49,8 +56,8 @@ let server = createServer({
         const i = Math.floor(Math.random() * categories.length)
         return categories[i]
       },
-      date(i) {
-        return add(startingDate, { days: i }).toISOString()
+      tweet() {
+        return lorem.sentence()
       },
     })
   },
@@ -61,13 +68,15 @@ let server = createServer({
         return true;
     });
     this.namespace = 'api'
-    this.get('tweets')
+    this.get('tweets', 'tweet')
+    this.get('notifications', 'notification')
 
     this.passthrough()
   },
 
   seeds(server) {
     server.createList('tweet', 10)
+    server.createList('notification', 20)
   }
 })
 
