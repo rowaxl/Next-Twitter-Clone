@@ -1,6 +1,6 @@
 import { createServer, Model, Factory, trait } from "miragejs"
-import { add } from 'date-fns'
-import faker, { name, internet, lorem, random } from 'faker'
+import { add, sub } from 'date-fns'
+import faker, { name, internet, lorem, random, time } from 'faker'
 import { AvatarGenerator } from 'random-avatar-generator'
 
 faker.seed(123)
@@ -13,6 +13,7 @@ let server = createServer({
   models: {
     tweet: Model,
     notification: Model,
+    message: Model,
   },
 
   factories: {
@@ -59,6 +60,25 @@ let server = createServer({
       tweet() {
         return lorem.sentence()
       },
+    }),
+    message: Factory.extend({
+      user() {
+        return {
+          id: internet.userName(),
+          name: name.findName(),
+          avatarURL: generator.generateRandomAvatar()
+        }
+      },
+      text() {
+        return lorem.sentence()
+      },
+      date() {
+        const recent = time.recent()
+
+        const a = Math.floor(Math.random() * 24 * 3600 * 1000)
+
+        return recent - a
+      }
     })
   },
 
@@ -70,13 +90,15 @@ let server = createServer({
     this.namespace = 'api'
     this.get('tweets', 'tweet')
     this.get('notifications', 'notification')
+    this.get('messages', 'message')
 
     this.passthrough()
-  },
+  }, 
 
   seeds(server) {
     server.createList('tweet', 10)
-    server.createList('notification', 20)
+    server.createList('notification', 10)
+    server.createList('message', 10)
   }
 })
 
