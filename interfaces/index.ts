@@ -21,3 +21,9 @@ export interface INotify {
   user: IUser
   category: NotifyCategory
 }
+
+export interface IMessage {
+  text: string
+  user: IUser
+  date: number
+}
