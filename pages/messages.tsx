@@ -24,7 +24,7 @@ const MessagesPage = () => {
   return (
     <div>
       {
-        ([...buffer.messages] as IMessage[]).reverse().map((message, i) => (
+        ([...buffer.messages]).sort((a, b) => a.date - b.date).map((message, i) => (
           <Message
             key={i.toFixed(1)}
             message={message}
