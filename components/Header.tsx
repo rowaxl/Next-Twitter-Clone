@@ -8,9 +8,7 @@ interface IHeaderProps {
 }
 
 const Header = ({ avatarURL, route, notifyType, onChangeNotifyType }: IHeaderProps) => {
-  console.log({ route })
-
-  const headerBorder = (route === 'Notifications' || route === 'Search' ) ? '' : 'border-b'
+  const headerBorder = (route === 'Notifications' || route === 'Search') ? '' : 'border-b'
 
   const allButtonColor = () => notifyType === 'all' ? " text-blue-500 border-b-2 border-blue-500" : " text-gray-500"
   const mentionButtonColor = () => notifyType === 'mention' ? " text-blue-500 border-b-2 border-blue-500" : " text-gray-500"
