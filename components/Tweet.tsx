@@ -3,6 +3,10 @@ import { parseISO, format } from 'date-fns'
 import RetweetIcon from './RetweetIcon'
 import LikeIcon from './LikeIcon'
 
+interface ITweetProps extends ITweet {
+  mentionedTo?: string
+}
+
 const Tweet = ({
   text,
   date,
@@ -10,7 +14,8 @@ const Tweet = ({
   replied,
   liked,
   retweeted,
-}: ITweet) => {
+  mentionedTo,
+}: ITweetProps) => {
   return (
     <div className='px-4 py-4 bg-gray-200 dark:bg-black border-b border-gray-400 dark:border-gray-600'>
       <div className='flex'>
@@ -37,6 +42,16 @@ const Tweet = ({
               </span>
             </span>
           </p>
+
+          {
+            mentionedTo &&
+            <p className="text-sm mb-2 text-gray-700 dark:text-gray-400">
+              Replying to
+              <span className="ml-2 text-blue-500">
+                @{mentionedTo}
+              </span>
+            </p>
+          }
 
           <p className="text-sm dark:text-white">
             {text}

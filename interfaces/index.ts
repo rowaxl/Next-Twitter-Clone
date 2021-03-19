@@ -14,10 +14,10 @@ export interface ITweet {
   retweeted: number
 }
 
-export type NotifyCategory = 'like' | 'retweet'
+export type NotifyCategory = 'all' | 'like' | 'retweet' | 'mention'
 
 export interface INotify {
-  tweet: string
+  tweet: ITweet
   user: IUser
   category: NotifyCategory
 }

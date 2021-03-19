@@ -8,6 +8,12 @@ faker.seed(123)
 const generator = new AvatarGenerator()
 
 let startingDate = new Date()
+
+const randomDate = () => {
+  let i = Math.floor(Math.random() * 5)
+  return add(startingDate, { days: i }).toISOString()
+}
+
 let server = createServer({
   timing: 1000,
   models: {
@@ -32,7 +38,7 @@ let server = createServer({
         return lorem.sentence()
       },
       date(i) {
-        return add(startingDate, { days: i }).toISOString()
+        return randomDate()
       },
       replied() {
         return Math.floor(Math.random() * 10)
@@ -53,12 +59,24 @@ let server = createServer({
         }
       },
       category() {
-        const categories = ['like', 'retweet']
+        const categories = ['like', 'retweet', 'mention']
         const i = Math.floor(Math.random() * categories.length)
         return categories[i]
       },
       tweet() {
-        return lorem.sentence()
+        return {
+          id: random.uuid(),
+          user: {
+              id: internet.userName(),
+              name: name.findName(),
+              avatarURL: generator.generateRandomAvatar()
+          },
+          text: lorem.sentence(),
+          date: randomDate(),
+          replied: Math.floor(Math.random() * 10),
+          liked: Math.floor(Math.random() * 100),
+          retweeted: Math.floor(Math.random() * 100),
+        }
       },
     }),
     message: Factory.extend({
