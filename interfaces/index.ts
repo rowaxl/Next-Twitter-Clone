@@ -27,3 +27,13 @@ export interface IMessage {
   user: IUser
   date: number
 }
+
+export interface INews {
+  source: {
+    name: string
+  }
+  title: string
+  url: string
+  urlToImage: string
+  publishedAt: string
+}

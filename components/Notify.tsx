@@ -24,8 +24,8 @@ const Notify = ({ notification }: INotifyProps) => {
   )
 
   const renderNotifications = () => (
-    <div className="w-full px-4 py-4 bg-gray-200 dark:bg-black border-b border-gray-400 dark:border-gray-600">
-      <div className="flex flex-row items-center my-4">
+    <div className="w-full px-4 py-2 bg-gray-200 dark:bg-black border-b border-gray-400 dark:border-gray-600">
+      <div className="flex flex-row items-center my-1">
         {
           notification.category === 'like' ?
             <LikeIcon className={'w-8 h-8'} isActive={true} /> :

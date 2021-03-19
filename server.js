@@ -102,9 +102,11 @@ let server = createServer({
 
   routes() {
     this.passthrough((request) => {
-      if (request.url === "/_next/static/development/_devPagesManifest.json")
-        return true;
+      if (request.url === "/_next/static/development/_devPagesManifest.json") return true;
+      
+      if (request.url.startsWith('http')) return true
     });
+
     this.namespace = 'api'
     this.get('tweets', 'tweet')
     this.get('notifications', 'notification')

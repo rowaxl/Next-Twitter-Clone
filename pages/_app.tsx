@@ -2,28 +2,38 @@ import { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
 import '../server'
 
+import { useState } from 'react'
+
+import { AvatarGenerator } from 'random-avatar-generator'
+import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { NotifyCategory } from '../interfaces'
+
+const generator = new AvatarGenerator()
+const myAvatar = generator.generateRandomAvatar()
 
 const AppWrap = ({ Component, pageProps }: AppProps) => {
-  const title = Component.displayName
+  const route = Component.displayName
 
-  const headerBorder = (Component.displayName === 'Notifications' || Component.displayName === 'Search') ? '' : 'border-b'
+  const [notificationType, setNotificationType] = useState<NotifyCategory>('all')
+
+  const handleNotificationType = (type: NotifyCategory) => {
+    setNotificationType(type)
+  }
+
+  pageProps.notificationType = notificationType
 
   return (
     <div className="flex h-screen justify-center items-center bg-gray-100 dark:bg-gray-800">
       <div className="flex flex-col max-w-md w-full md:w-1/2 h-full md:h-2/3">
-        <header className={"flex item-center px-4 py-3 dark:bg-black " + headerBorder}>
-          <img
-            className="rounded-full w-7 h-7"
-            src="https://pbs.twimg.com/profile_images/1355966530652045313/LaqS48cW_400x400.jpg"
-            alt="profile-img"
-          />
-          <p className="ml-6 text-lg font-extrabold dark:text-white">
-            {title ? title : 'Home'}
-          </p>
-        </header>
+        <Header
+          route={route}
+          avatarURL={myAvatar}
+          notifyType={notificationType}
+          onChangeNotifyType={handleNotificationType}
+        />
 
-        <main className="flex-1 overflow-scroll">
+        <main className="flex-1 overflow-scroll dark:bg-black">
           <Component {...pageProps} />
         </main>
 

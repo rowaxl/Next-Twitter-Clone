@@ -17,8 +17,6 @@ const Message = ({ message }: IMessageProps) => {
       })
     }
 
-    console.log(now - message.date)
-
     return `${Math.floor((now - message.date) / 60000)}m`
   }
 
